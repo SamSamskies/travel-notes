@@ -1,4 +1,7 @@
 import Backbone from 'backbone';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Login from './components/Login';
 
 export default Backbone.Router.extend({
 
@@ -14,7 +17,7 @@ export default Backbone.Router.extend({
 
   showStart() {
     console.log('start');
-
+    ReactDOM.render(<Login />, document.querySelector('#main-container'));
   },
 
   showTravelers() {

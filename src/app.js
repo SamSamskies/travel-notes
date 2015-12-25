@@ -10,8 +10,7 @@ Backbone.history.start({ pushState: true });
 const page = document.referrer.split('/').pop();
 if (page === '404.html') router.redirect();
 
-const mountNode = document.querySelector('#nav-container');
-ReactDOM.render(<MainNavbar />, mountNode);
+ReactDOM.render(<MainNavbar />, document.querySelector('#nav-container'));
 
 
 

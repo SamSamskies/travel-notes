@@ -1,0 +1,35 @@
+body, .btn {
+  font-size: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  height: 70px;
+  color: white;
+  padding: 0 20px;
+  font-size: 24px;
+}
+
+#main-container {
+  margin: 20px 0;
+}
+
+.btn {
+  margin: 30px 0;
+}
+
+.btn-primary {
+  background-color: #333;
+  border: #333;
+  padding: 14px;
+}
+
+.btn-primary:hover,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus {
+  background-color: #999;
+  border-color: #999;
+}
