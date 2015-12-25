@@ -2,8 +2,10 @@ import Backbone from 'backbone';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from './components/Login';
+import currentUser from './currentUser';
 
-export default Backbone.Router.extend({
+const mountNode = document.querySelector('#main-container');
+const Router = Backbone.Router.extend({
 
   routes: {
     '': 'redirect',
@@ -17,11 +19,15 @@ export default Backbone.Router.extend({
 
   showStart() {
     console.log('start');
-    ReactDOM.render(<Login />, document.querySelector('#main-container'));
+    ReactDOM.render(<Login />, mountNode);
   },
 
   showTravelers() {
     console.log('travelers');
+    ReactDOM.render(<h1>Travler's Page</h1>, mountNode);
   }
 
 });
+const router = new Router();
+
+export default router;
