@@ -2,6 +2,7 @@ import Backbone from 'backbone';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from './components/Login';
+import Main from './components/Main';
 import currentUser from './currentUser';
 
 const mountNode = document.querySelector('#main-container');
@@ -24,7 +25,7 @@ const Router = Backbone.Router.extend({
 
   showTravelers() {
     console.log('travelers');
-    ReactDOM.render(<h1>Travler's Page</h1>, mountNode);
+    ReactDOM.render(<Main />, mountNode);
   }
 
 });

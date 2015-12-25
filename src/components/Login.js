@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import request from 'superagent';
-import { Button, Input } from 'react-bootstrap';
+import { ButtonInput, Input } from 'react-bootstrap';
 import router from '../router';
 import currentUser from '../currentUser';
 
@@ -19,12 +19,13 @@ export default class Login extends Component {
     return (
       <form onSubmit={!isLoading ? this.handleSubmit : null}>
         <Input ref="name" type="text" label="Traveler's name" placeholder="Amos, Andy or Evie" autoFocus />
-        <Button
+        <ButtonInput
+          type="submit"
           bsStyle="primary"
           disabled={isLoading}
           block>
           {isLoading ? 'Loading...' : 'Enter'}
-        </Button>
+        </ButtonInput>
       </form>
     );
   }
