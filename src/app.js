@@ -1,7 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button } from 'react-bootstrap';
+const Backbone = require('backbone');
+const Router = Backbone.Router.extend({
 
-let mountNode = document.querySelector('#main-container');
+  routes: {
+    '': 'redirect',
+    'start': 'showStart',
+    'travelers': 'showTravelers'
+  },
 
-ReactDOM.render(<Button bsStyle="primary">Default button</Button>, mountNode);
+  redirect() {
+    this.navigate('/start', { trigger: true });
+  },
+
+  showStart() {
+    console.log('start');
+  },
+
+  showTravelers() {
+    console.log('travelers');
+  }
+
+});
+
+const router = new Router();
+Backbone.history.start({ pushState: true });
+
+const page = document.referrer.split('/').pop();
+if (page === '404.html') router.redirect();
+
+
