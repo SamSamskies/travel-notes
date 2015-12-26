@@ -1,22 +1,27 @@
+import request from 'superagent';
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { Accordion, Panel } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
+import ControlledPanelGroup from './ControlledPanelGroup';
 import currentUser from '../currentUser';
 
 export default class Main extends Component {
+  constructor() {
+    super();
+    this.state = {
+      travelers: []
+    };
+    request
+      .get('https://young-beyond-8772.herokuapp.com/travelers')
+      .set('Authorization', 'Token token=' + currentUser.get('token'))
+      .end((err, res) => {
+        if (err) return // just ignore errors for now;
+        this.setState({ travelers: res.body });
+      });
+  }
+
   render() {
     return (
-      <Accordion>
-        <Panel header="AMOS" eventKey="1">
-          <h1>AMOS' List</h1>
-        </Panel>
-        <Panel header="ANDY" eventKey="2">
-          <h1>ANDY's List</h1>
-        </Panel>
-        <Panel header="EVIE" eventKey="3">
-          <h1>EVIE's List</h1>
-        </Panel>
-      </Accordion>
+      <ControlledPanelGroup items={this.state.travelers} />
     );
   }
 };

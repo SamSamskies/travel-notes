@@ -14,7 +14,8 @@ nav {
 }
 
 #main-container {
-  margin: 20px 0;
+  margin: 20px auto;
+  width: 375px;
 }
 
 .btn {
@@ -32,4 +33,24 @@ nav {
 .btn-primary[disabled]:focus {
   background-color: #999;
   border-color: #999;
+}
+
+.panel-default>.panel-heading {
+  background-color: #333;
+  color: white;
+}
+
+.panel-title:after,
+.panel.active .panel-title:after {
+  font-family: 'Glyphicons Halflings';
+  content: "\e080";
+  float: right;
+}
+
+.panel.active .panel-title:after {
+  content: "\e259";
+}
+
+.panel-title a {
+  text-decoration: none;
 }

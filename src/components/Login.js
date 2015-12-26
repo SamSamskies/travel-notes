@@ -43,9 +43,9 @@ export default class Login extends Component {
 
         if (err) return // just ignore errors for now;
 
-        const { name, token } = res.body;
+        const { id, name, token } = res.body;
 
-        currentUser.set({ name, token });
+        currentUser.set({ id, name, token });
         router.navigate('/travelers', { trigger: true });
       }.bind(this));
   }
