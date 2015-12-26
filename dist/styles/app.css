@@ -2,6 +2,10 @@ body, .btn {
   font-size: 20px;
 }
 
+input[type="checkbox"]:focus {
+  outline: 0;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -33,6 +37,10 @@ nav {
 .btn-primary[disabled]:focus {
   background-color: #999;
   border-color: #999;
+}
+
+.checkbox label {
+  font-size: 14px;
 }
 
 .panel:hover {
