@@ -35,6 +35,10 @@ nav {
   border-color: #999;
 }
 
+.panel:hover {
+  cursor: pointer;
+}
+
 .panel-default>.panel-heading {
   background-color: #333;
   color: white;

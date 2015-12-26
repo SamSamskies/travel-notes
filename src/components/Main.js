@@ -1,7 +1,7 @@
 import request from 'superagent';
 import React, {Component} from 'react';
 import { Panel } from 'react-bootstrap';
-import ControlledPanelGroup from './ControlledPanelGroup';
+import CollapsiblePanel from './CollapsiblePanel';
 import currentUser from '../currentUser';
 
 export default class Main extends Component {
@@ -21,7 +21,15 @@ export default class Main extends Component {
 
   render() {
     return (
-      <ControlledPanelGroup items={this.state.travelers} />
+      <div>
+        {this.state.travelers.map(item => {
+          return (
+            <CollapsiblePanel id={item.id} key={item.id} header={item.name.toUpperCase()} eventKey={item.id} collapsible={true}>
+              <h1>{item.name}</h1>
+            </CollapsiblePanel>
+          );
+        })}
+      </div>
     );
   }
 };
