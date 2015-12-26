@@ -10,12 +10,30 @@ export default class Main extends Component {
     this.state = {
       travelers: []
     };
+    this.updateDestinations = this.updateDestinations.bind(this);
     request
       .get('https://young-beyond-8772.herokuapp.com/travelers')
       .set('Authorization', 'Token token=' + currentUser.get('token'))
       .end((err, res) => {
         if (err) return // just ignore errors for now;
         this.setState({ travelers: res.body });
+      });
+  }
+
+  updateDestinations(destinations) {
+    request
+      .patch('https://young-beyond-8772.herokuapp.com/travelers/' + currentUser.id)
+      .send({ destinations })
+      .set('Authorization', 'Token token=' + currentUser.get('token'))
+      .end((err, res) => {
+        if (err) return // just ignore errors for now;
+        const travelers = this.state.travelers.map(t => {
+          if (t.id === res.body.id) {
+            t.destinations = res.body.destinations;
+          }
+          return t;
+        });
+        this.setState({ travelers });
       });
   }
 
@@ -30,7 +48,8 @@ export default class Main extends Component {
               header={item.name.toUpperCase()}
               eventKey={item.id}
               collapsible={true}
-              destinations={item.destinations} />
+              destinations={item.destinations}
+              updateDestinations={this.updateDestinations} />
           );
         })}
       </div>
