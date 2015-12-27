@@ -1,22 +1,26 @@
-import request from 'superagent';
+import request from 'superagent-bluebird-promise';
 
 export default class ApiCaller {
-  constructor(store) {
+  constructor() {
     this.baseUrl = 'https://young-beyond-8772.herokuapp.com';
-    this.store = store;
   }
 
   login(name) {
-    request
+    return request
       .post(`${this.baseUrl}/auth`)
-      .send({ name })
-      .end((err, res) => {
-        if (err) return // just ignore errors for now;
+      .send({ name });
+  }
 
-        const data = Object.assign({}, res.body, { type: 'LOGGED_IN' });
+  getTravelers(authToken) {
+    return request
+      .get(`${this.baseUrl}/travelers`)
+      .set('Authorization', `Token token=${authToken}`);
+  }
 
-        this.store.dispatch(data);
-      });
-
+  updateDestinations(destinations, authToken, userId) {
+    return request
+      .patch(`${this.baseUrl}/${userId}`)
+      .send({ destinations })
+      .set('Authorization', `Token token=${authToken}`);
   }
 };

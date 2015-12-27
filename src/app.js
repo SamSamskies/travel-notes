@@ -8,21 +8,31 @@ import Router from './Router';
 
 const defaultState = {
   isLoading: false,
-  currentUser: {}
+  currentUser: {},
+  travelers: []
 };
 const store = createStore(reducer);
-const apiCaller = new ApiCaller(store);
 const mountNode = document.querySelector('#main-container');
+const apiCaller = new ApiCaller();
 const router = new Router({ store, mountNode, apiCaller });
 const page = document.referrer.split('/').pop();
 
-function reduceToCurrentUser(state = {}, action) {
+function reduceCurrentUser(currentUser = {}, action) {
   switch (action.type) {
     case 'LOGGED_IN':
       const { id, name, token } = action;
-      return Object.assign({}, state, { id, name, token });
+      return Object.assign({}, currentUser, { id, name, token });
     default:
-      return state
+      return currentUser
+  }
+}
+
+function reduceTravelers(travelers = [], action) {
+  switch (action.type) {
+    case 'TRAVELERS_FETCHED':
+      return action.travelers;
+    default:
+      return travelers
   }
 }
 
@@ -31,13 +41,20 @@ function reducer(state = defaultState, action) {
     case 'LOGIN':
       return Object.assign({}, state, {
         isLoading: true,
-        currentUser: reduceToCurrentUser(state.currentUser, action)
+        currentUser: reduceCurrentUser(state.currentUser, action),
+        travelers: reduceTravelers(state.travelers, action)
       });
     case 'LOGGED_IN':
-      router.navigate('/travelers', { trigger: true });
       return Object.assign({}, state, {
         isLoading: false,
-        currentUser: reduceToCurrentUser(state.currentUser, action)
+        currentUser: reduceCurrentUser(state.currentUser, action),
+        travelers: reduceTravelers(state.travelers, action)
+      });
+    case 'TRAVELERS_FETCHED':
+      return Object.assign({}, state, {
+        isLoading: false,
+        currentUser: reduceCurrentUser(state.currentUser, action),
+        travelers: reduceTravelers(state.travelers, action)
       });
     default:
       return state

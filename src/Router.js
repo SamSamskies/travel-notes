@@ -22,10 +22,24 @@ export default Backbone.Router.extend({
   },
 
   showStart() {
-    ReactDOM.render(<Login store={this.store} apiCaller={this.apiCaller} />, this.mountNode);
+    ReactDOM.render(
+      <Login
+        store={this.store}
+        apiCaller={this.apiCaller}
+        goToMainPage={authToken => {
+          this.apiCaller.getTravelers(authToken)
+            .then(res => {
+              this.store.dispatch({
+                type: 'TRAVELERS_FETCHED',
+                travelers: res.body
+              });
+              this.navigate('/travelers', { trigger: true });
+            });
+        }}
+      />, this.mountNode);
   },
 
   showTravelers() {
-    ReactDOM.render(<Main />, this.mountNode);
+    ReactDOM.render(<Main store={this.store} apiCaller={this.apiCaller} />, this.mountNode);
   }
 });
