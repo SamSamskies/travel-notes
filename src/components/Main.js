@@ -30,6 +30,7 @@ export default class Main extends Component {
               collapsible={true}
               destinations={t.destinations}
               expanded={panelOpenForUserId[t.id] || false}
+              isEditable={t.id == currentUser.id}
               onTravelerPanelClick={() => {
                 store.dispatch({ type: 'TRAVELER_PANEL_CLICKED', userId });
               }}

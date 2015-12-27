@@ -4,7 +4,7 @@ import { Panel } from 'react-bootstrap';
 export default class TravelerPanel extends Component {
 
   render() {
-    const { destinations, onTravelerPanelClick } = this.props;
+    const { destinations, onTravelerPanelClick, isEditable } = this.props;
 
     return (
       <Panel
@@ -18,7 +18,7 @@ export default class TravelerPanel extends Component {
             return (
               <li key={key}>
                 <div className="checkbox checkbox-success">
-                  <input type="checkbox" id={"checkbox" + key} checked={d.visited} readOnly />
+                  <input type="checkbox" id={"checkbox" + key} checked={d.visited} disabled={!isEditable} readOnly />
                   <label htmlFor={"checkbox" + key}>
                     {d.name}
                   </label>
