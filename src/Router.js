@@ -3,15 +3,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from './components/Login';
 import Main from './components/Main';
-import currentUser from './currentUser';
 
-const mountNode = document.querySelector('#main-container');
-const Router = Backbone.Router.extend({
-
+export default Backbone.Router.extend({
   routes: {
     '': 'redirect',
     'start': 'showStart',
     'travelers': 'showTravelers'
+  },
+
+  initialize(options = {}) {
+    this.store = options.store;
+    this.mountNode = options.mountNode;
+    this.apiCaller = options.apiCaller;
   },
 
   redirect() {
@@ -19,16 +22,10 @@ const Router = Backbone.Router.extend({
   },
 
   showStart() {
-    console.log('start');
-    ReactDOM.render(<Login />, mountNode);
+    ReactDOM.render(<Login store={this.store} apiCaller={this.apiCaller} />, this.mountNode);
   },
 
   showTravelers() {
-    console.log('travelers');
-    ReactDOM.render(<Main />, mountNode);
+    ReactDOM.render(<Main />, this.mountNode);
   }
-
 });
-const router = new Router();
-
-export default router;

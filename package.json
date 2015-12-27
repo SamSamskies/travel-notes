@@ -34,6 +34,7 @@
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
+    "redux": "^3.0.5",
     "superagent": "^1.6.1"
   }
 }
