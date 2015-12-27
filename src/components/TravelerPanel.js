@@ -4,15 +4,15 @@ import { Panel } from 'react-bootstrap';
 export default class TravelerPanel extends Component {
 
   render() {
-    const { destinations } = this.props;
+    const { destinations, onTravelerPanelClick } = this.props;
 
     return (
       <Panel
         className="active"
-        expanded
+        onClick={onTravelerPanelClick}
         {...this.props}
       >
-        <ul className="list-unstyled">
+        <ul className="list-unstyled" onClick={e => e.stopPropagation()}>
           {destinations.map((d, i) => {
             const key = this.props.id + i;
             return (

@@ -15,19 +15,24 @@ export default class Main extends Component {
 
   render() {
     const { store } = this.props;
-    const { travelers } = store.getState();
+    const { travelers, panelOpenForUserId, currentUser } = store.getState();
 
     return (
       <div>
-        {travelers.map(item => {
+        {travelers.map(t => {
+          const userId = t.id;
           return (
             <TravelerPanel
-              id={item.id}
-              key={item.id}
-              header={item.name.toUpperCase()}
-              eventKey={item.id}
+              id={t.id}
+              key={t.id}
+              header={t.name.toUpperCase()}
+              eventKey={t.id}
               collapsible={true}
-              destinations={item.destinations}
+              destinations={t.destinations}
+              expanded={panelOpenForUserId[t.id] || false}
+              onTravelerPanelClick={() => {
+                store.dispatch({ type: 'TRAVELER_PANEL_CLICKED', userId });
+              }}
               updateDestinations={() => alert('Refactor in progress')} />
           );
         })}

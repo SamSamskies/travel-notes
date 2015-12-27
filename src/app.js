@@ -9,7 +9,8 @@ import Router from './Router';
 const defaultState = {
   isLoading: false,
   currentUser: {},
-  travelers: []
+  travelers: [],
+  panelOpenForUserId: {}
 };
 const store = createStore(reducer);
 const mountNode = document.querySelector('#main-container');
@@ -23,7 +24,7 @@ function reduceCurrentUser(currentUser = {}, action) {
       const { id, name, token } = action;
       return Object.assign({}, currentUser, { id, name, token });
     default:
-      return currentUser
+      return currentUser;
   }
 }
 
@@ -32,7 +33,27 @@ function reduceTravelers(travelers = [], action) {
     case 'TRAVELERS_FETCHED':
       return action.travelers;
     default:
-      return travelers
+      return travelers;
+  }
+}
+
+function reducePanelOpenForUserId(panelOpenForUserId = {}, action) {
+  const togglePanelOpenForUser = userId => {
+    const clonedPanelOpenForUserId = Object.assign({}, panelOpenForUserId);
+    const currentValue = panelOpenForUserId[userId];
+    clonedPanelOpenForUserId[userId] = !currentValue;
+    return clonedPanelOpenForUserId;
+  }
+
+  switch (action.type) {
+    case 'LOGGED_IN':
+      const { id } = action;
+      return togglePanelOpenForUser(id);
+    case 'TRAVELER_PANEL_CLICKED':
+      const { userId } = action;
+      return togglePanelOpenForUser(userId);
+    default:
+      return panelOpenForUserId;
   }
 }
 
@@ -42,19 +63,29 @@ function reducer(state = defaultState, action) {
       return Object.assign({}, state, {
         isLoading: true,
         currentUser: reduceCurrentUser(state.currentUser, action),
-        travelers: reduceTravelers(state.travelers, action)
+        travelers: reduceTravelers(state.travelers, action),
+        panelOpenForUserId: reducePanelOpenForUserId(state.panelOpenForUserId, action)
       });
     case 'LOGGED_IN':
       return Object.assign({}, state, {
         isLoading: false,
         currentUser: reduceCurrentUser(state.currentUser, action),
-        travelers: reduceTravelers(state.travelers, action)
+        travelers: reduceTravelers(state.travelers, action),
+        panelOpenForUserId: reducePanelOpenForUserId(state.panelOpenForUserId, action)
       });
     case 'TRAVELERS_FETCHED':
       return Object.assign({}, state, {
         isLoading: false,
         currentUser: reduceCurrentUser(state.currentUser, action),
-        travelers: reduceTravelers(state.travelers, action)
+        travelers: reduceTravelers(state.travelers, action),
+        panelOpenForUserId: reducePanelOpenForUserId(state.panelOpenForUserId, action)
+      });
+    case 'TRAVELER_PANEL_CLICKED':
+      return Object.assign({}, state, {
+        isLoading: false,
+        currentUser: reduceCurrentUser(state.currentUser, action),
+        travelers: reduceTravelers(state.travelers, action),
+        panelOpenForUserId: reducePanelOpenForUserId(state.panelOpenForUserId, action)
       });
     default:
       return state
