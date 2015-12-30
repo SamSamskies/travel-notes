@@ -1,25 +1,23 @@
 import request from 'superagent-bluebird-promise';
 
-export default class ApiCaller {
-  constructor() {
-    this.baseUrl = 'https://young-beyond-8772.herokuapp.com';
-  }
+const baseUrl = 'https://young-beyond-8772.herokuapp.com';
 
+export default {
   login(name) {
     return request
-      .post(`${this.baseUrl}/auth`)
+      .post(`${baseUrl}/auth`)
       .send({ name });
-  }
+  },
 
   getTravelers(authToken) {
     return request
-      .get(`${this.baseUrl}/travelers`)
+      .get(`${baseUrl}/travelers`)
       .set('Authorization', `Token token=${authToken}`);
-  }
+  },
 
   updateDestinations(destinations, authToken, userId) {
     return request
-      .patch(`${this.baseUrl}/${userId}`)
+      .patch(`${baseUrl}/${userId}`)
       .send({ destinations })
       .set('Authorization', `Token token=${authToken}`);
   }

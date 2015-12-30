@@ -30,12 +30,15 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "backbone": "^1.2.3",
     "bluebird": "^2.10.2",
+    "history": "^1.17.0",
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
+    "react-redux": "^4.0.5",
+    "react-router": "^1.0.3",
     "redux": "^3.0.5",
+    "redux-simple-router": "^1.0.2",
     "superagent": "^1.6.1",
     "superagent-bluebird-promise": "^2.1.1"
   }
