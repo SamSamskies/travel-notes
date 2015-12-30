@@ -2,10 +2,11 @@ import React from 'react';
 
 export default function DestinationListItem(props) {
   const { id, isChecked, isDisabled, onChange, label } = props;
+  const className = `checkbox checkbox-success ${isDisabled ? '' : 'destination-enabled'}`;
 
   return (
     <li>
-      <div className="checkbox checkbox-success">
+      <div className={className}>
         <input
           type="checkbox"
           id={id}

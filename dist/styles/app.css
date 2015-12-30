@@ -43,8 +43,19 @@ nav {
   border-color: #999;
 }
 
+.checkbox {
+  cursor: initial;
+}
+
 .checkbox label {
   font-size: 14px;
+}
+
+.destination-enabled:after {
+  content: 'x';
+  float: right;
+  color: #ccc;
+  cursor: pointer;
 }
 
 .panel:hover {
