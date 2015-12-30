@@ -6,9 +6,7 @@ import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 import { Provider } from 'react-redux';
 import { createHistory } from 'history';
 import reducers from './reducers';
-import App from './components/App';
-import Login from './components/Login';
-import Travelers from './components/Travelers';
+import { App, Login, Travelers } from './components';
 
 const reducer = combineReducers(Object.assign({}, reducers, {
   routing: routeReducer
