@@ -1,6 +1,7 @@
 import request from 'superagent';
 import React, {Component} from 'react';
 import { Panel } from 'react-bootstrap';
+import DestinationListItem from './DestinationListItem';
 
 export default class Travelers extends Component {
   componentDidMount() {
@@ -36,20 +37,15 @@ export default class Travelers extends Component {
               }}
             >
               <ul className="list-unstyled" onClick={e => e.stopPropagation()}>
-                {t.destinations.map((d, i) => {
-                  const key = userId + i;
-
-                  return (
-                    <li key={key}>
-                      <div className="checkbox checkbox-success">
-                        <input type="checkbox" id={"checkbox" + key} checked={d.visited} disabled={userId != currentUser.id} onChange={() => alert('Refactor in progress')} />
-                        <label htmlFor={"checkbox" + key}>
-                          {d.name}
-                        </label>
-                      </div>
-                    </li>
-                  );
-                })}
+                {t.destinations.map((d, i) =>
+                  <DestinationListItem
+                    key={userId + i}
+                    isChecked={d.visited}
+                    isDisabled={userId != currentUser.id}
+                    onChange={() => alert('Refactor in progress')}
+                    label={d.name}
+                  />
+                )}
               </ul>
             </Panel>
           );
