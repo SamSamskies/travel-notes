@@ -1,12 +1,10 @@
-import request from 'superagent';
 import React, {Component} from 'react';
-import { Panel } from 'react-bootstrap';
-import DestinationListItem from './DestinationListItem';
+import TravelerPanel from './TravelerPanel';
 
 export default class Travelers extends Component {
   componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() => this.forceUpdate());
+    this.store = this.context.store;
+    this.unsubscribe = this.store.subscribe(() => this.forceUpdate());
   }
 
   componentWillUnmount() {
@@ -15,7 +13,7 @@ export default class Travelers extends Component {
 
   render() {
     const { store } = this.context;
-    const { travelers, panelOpenForUserId, currentUser } = store.getState().reducer;
+    const { travelers, panelOpenForUserId } = store.getState().reducer;
 
     return (
       <div>
@@ -23,36 +21,17 @@ export default class Travelers extends Component {
           const userId = t.id;
 
           return (
-            <Panel
-              id={userId}
+            <TravelerPanel
               key={userId}
+              userId={userId}
               className={panelOpenForUserId[userId] ? 'active' : ''}
               header={t.name.toUpperCase()}
               eventKey={userId}
               collapsible
-              destinations={t.destinations}
               expanded={panelOpenForUserId[userId] || false}
-              onClick={() => {
-                store.dispatch({ type: 'TRAVELER_PANEL_CLICKED', userId });
-              }}
-            >
-              <ul className="list-unstyled" onClick={e => e.stopPropagation()}>
-                {t.destinations.map((d, i) => {
-                  const key = `${userId}-${i}`;
-
-                  return (
-                    <DestinationListItem
-                      key={key}
-                      id={`destination-list-item-${key}`}
-                      isChecked={d.visited}
-                      isDisabled={userId != currentUser.id}
-                      onChange={() => alert('Refactor in progress')}
-                      label={d.name}
-                    />
-                  );
-                })}
-              </ul>
-            </Panel>
+              destinations={t.destinations}
+              needToSave={t.needToSave}
+            />
           );
         })}
       </div>

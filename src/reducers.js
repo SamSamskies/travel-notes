@@ -23,6 +23,15 @@ function isLoadingReducer(isLoading = false, action) {
   }
 }
 
+function needToSaveReducer(needToSave = false, action) {
+  switch (action.type) {
+    case 'DESTINATION_TOGGLE':
+      return true;
+    default:
+      return needToSave;
+  }
+}
+
 function currentUserReducer(currentUser = {}, action) {
   switch (action.type) {
     case 'LOGGED_IN':
@@ -33,10 +42,53 @@ function currentUserReducer(currentUser = {}, action) {
   }
 }
 
+function destinationsReducer(destinations = [], action) {
+  switch (action.type) {
+    case 'DESTINATION_TOGGLE':
+      return destinations.map(d => {
+        if (d.name.toLowerCase() !== action.name.toLowerCase()) return d;
+        return Object.assign({}, d, { visited: !d.visited });
+      });
+      return updatedDestinations;
+    case 'DESTINATION_SAVED':
+      return action.destinations;
+    default:
+      return destinations;
+  }
+}
+
+function travelerReducer(traveler = {}, action) {
+  switch (action.type) {
+    case 'DESTINATION_TOGGLE':
+      return Object.assign(
+        {},
+        traveler,
+        {
+          needToSave: traveler.id === action.userId,
+          destinations: destinationsReducer(traveler.destinations, action)
+        }
+      );
+    case 'DESTINATION_SAVED':
+      return Object.assign(
+        {},
+        traveler,
+        {
+          needToSave: false,
+          destinations: destinationsReducer(traveler.destinations, action)
+        }
+      );
+    default:
+      return traveler;
+  }
+}
+
 function travelersReducer(travelers = [], action) {
   switch (action.type) {
     case 'TRAVELERS_FETCHED':
-      return action.travelers;
+      return action.travelers.map(t => travelerReducer(t, action));
+    case 'DESTINATION_TOGGLE':
+    case 'DESTINATION_SAVED':
+      return travelers.map(t => travelerReducer(t, action));
     default:
       return travelers;
   }

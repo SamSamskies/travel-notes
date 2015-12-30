@@ -17,8 +17,8 @@ export default {
 
   updateDestinations(destinations, authToken, userId) {
     return request
-      .patch(`${baseUrl}/${userId}`)
+      .patch(`${baseUrl}/travelers/${userId}`)
       .send({ destinations })
-      .set('Authorization', `Token token=${authToken}`);
+      .set('Authorization', `Token token=${authToken}`)
   }
 };
