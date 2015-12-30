@@ -37,15 +37,20 @@ export default class Travelers extends Component {
               }}
             >
               <ul className="list-unstyled" onClick={e => e.stopPropagation()}>
-                {t.destinations.map((d, i) =>
-                  <DestinationListItem
-                    key={userId + i}
-                    isChecked={d.visited}
-                    isDisabled={userId != currentUser.id}
-                    onChange={() => alert('Refactor in progress')}
-                    label={d.name}
-                  />
-                )}
+                {t.destinations.map((d, i) => {
+                  const key = `${userId}-${i}`;
+
+                  return (
+                    <DestinationListItem
+                      key={key}
+                      id={`destination-list-item-${key}`}
+                      isChecked={d.visited}
+                      isDisabled={userId != currentUser.id}
+                      onChange={() => alert('Refactor in progress')}
+                      label={d.name}
+                    />
+                  );
+                })}
               </ul>
             </Panel>
           );

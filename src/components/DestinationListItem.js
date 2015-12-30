@@ -1,18 +1,18 @@
 import React from 'react';
 
 export default function DestinationListItem(props) {
-  const { key, isChecked, isDisabled, onChange, label } = props;
+  const { id, isChecked, isDisabled, onChange, label } = props;
 
   return (
-    <li key={key}>
+    <li>
       <div className="checkbox checkbox-success">
         <input
           type="checkbox"
-          id={"checkbox" + key}
+          id={id}
           checked={isChecked}
           disabled={isDisabled}
           onChange={onChange} />
-        <label htmlFor={"checkbox" + key}>{label}</label>
+        <label htmlFor={id}>{label}</label>
       </div>
     </li>
   );
