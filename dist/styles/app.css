@@ -51,11 +51,15 @@ nav {
   font-size: 14px;
 }
 
-.destination-enabled:after {
-  content: 'x';
+.delete-destination-icon {
+  display: none;
   float: right;
   color: #ccc;
   cursor: pointer;
+}
+
+.destination-enabled .delete-destination-icon {
+  display: inline;
 }
 
 .panel:hover {

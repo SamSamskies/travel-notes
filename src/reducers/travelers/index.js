@@ -5,7 +5,8 @@ export default function travelersReducer(travelers = [], action) {
     case 'TRAVELERS_FETCHED':
       return action.travelers.map(t => travelerReducer(t, action));
     case 'DESTINATION_TOGGLE':
-    case 'DESTINATION_SAVED':
+    case 'DESTINATION_DELETE':
+    case 'DESTINATIONS_SAVED':
       return travelers.map(t => travelerReducer(t, action));
     default:
       return travelers;

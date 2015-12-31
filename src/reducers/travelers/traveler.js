@@ -3,7 +3,8 @@ import destinationsReducer from './destinations';
 export default function travelerReducer(traveler = {}, action) {
   switch (action.type) {
     case 'DESTINATION_TOGGLE':
-    case 'DESTINATION_SAVED':
+    case 'DESTINATION_DELETE':
+    case 'DESTINATIONS_SAVED':
       return Object.assign(
         {},
         traveler,

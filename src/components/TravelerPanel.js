@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Panel } from 'react-bootstrap';
 import DestinationListItem from './DestinationListItem';
-import { handleTravelerPanelClick, handleDestinationToggle } from '../actions';
+import {
+  handleTravelerPanelClick,
+  handleDestinationToggle,
+  handleDestinationDelete
+} from '../actions';
 
 const mapStateToProps = ({ reducer: state }) => {
   return {
@@ -22,6 +26,13 @@ const mapDispatchToProps = (dispatch) => {
         return Object.assign({}, d, { visited: !d.visited });
       });
       dispatch(handleDestinationToggle(userId, currentUser, updatedDestinations));
+    },
+    handleDestinationDelete: (userId, currentUser, destinationName, destinations) => {
+      const updatedDestinations = destinations.reduce((memo, d) => {
+        if (d.name.toLowerCase() === destinationName.toLowerCase()) return memo;
+        return memo.concat([d]);
+      }, []);
+      dispatch(handleDestinationDelete(userId, currentUser, updatedDestinations));
     }
   }
 }
@@ -35,7 +46,8 @@ const TravelerPanel = props => {
     header,
     destinations,
     handlePanelClick,
-    handleDestinationToggle
+    handleDestinationToggle,
+    handleDestinationDelete
   } = props;
 
   return (
@@ -60,6 +72,7 @@ const TravelerPanel = props => {
               isDisabled={userId != currentUser.id}
               label={d.name}
               onChange={() => handleDestinationToggle(userId, currentUser, d.name, destinations)}
+              onDelete={() => handleDestinationDelete(userId, currentUser, d.name, destinations)}
             />
           );
         })}
