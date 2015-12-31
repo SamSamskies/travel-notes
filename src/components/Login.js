@@ -11,18 +11,18 @@ const mapStateToProps = ({ reducer: state }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSubmit: (e, name) => {
+    handleSubmit: (e, name) => {
       e.preventDefault();
       dispatch(login(name));
     }
   }
 }
 
-const Login = ({ isLoading, onSubmit }) => {
+const Login = ({ isLoading, handleSubmit }) => {
   let input;
 
   return (
-    <form onSubmit={e => onSubmit(e, input.getValue())}>
+    <form onSubmit={e => handleSubmit(e, input.getValue())}>
       <Input ref={node => input = node} type="text" label="Traveler's name" placeholder="Amos, Andy or Evie" autoFocus />
       <ButtonInput
         type="submit"

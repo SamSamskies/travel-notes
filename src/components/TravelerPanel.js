@@ -1,78 +1,72 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Panel } from 'react-bootstrap';
 import DestinationListItem from './DestinationListItem';
-import apiCaller from '../apiCaller';
+import { handleTravelerPanelClick, handleDestinationToggle } from '../actions';
 
-export default class TravelerPanel extends Component {
-  componentDidMount() {
-    this.store = this.context.store;
+const mapStateToProps = ({ reducer: state }) => {
+  return {
+    currentUser: state.currentUser,
+    panelOpenForUserId: state.panelOpenForUserId
   }
+}
 
-  componentDidUpdate() {
-    const { destinations, needToSave } = this.props;
-
-    if (needToSave) {
-      this._saveDestinations(destinations);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handlePanelClick: userId => {
+      dispatch(handleTravelerPanelClick(userId));
+    },
+    handleDestinationToggle: (userId, currentUser, destinationName, destinations) => {
+      const updatedDestinations = destinations.map(d => {
+        if (d.name.toLowerCase() !== destinationName.toLowerCase()) return d;
+        return Object.assign({}, d, { visited: !d.visited });
+      });
+      dispatch(handleDestinationToggle(userId, currentUser, updatedDestinations));
     }
   }
+}
 
-  render() {
-    const { store } = this.context;
-    const { currentUser } = store.getState().reducer;
-    const { userId, destinations } = this.props;
+const TravelerPanel = props => {
 
-    return (
-      <Panel
-        onClick={() => this._handlePanelClick(userId)}
-        {...this.props}
-      >
-        <ul className="list-unstyled" onClick={e => e.stopPropagation()}>
-          {destinations.map((d, i) => {
-            const key = `${userId}-${i}`;
-            const authToken = currentUser.token;
+  const {
+    userId,
+    currentUser,
+    panelOpenForUserId,
+    header,
+    destinations,
+    handlePanelClick,
+    handleDestinationToggle
+  } = props;
 
-            return (
-              <DestinationListItem
-                key={key}
-                id={`destination-list-item-${key}`}
-                isChecked={d.visited}
-                isDisabled={userId != currentUser.id}
-                label={d.name}
-                onChange={() => this._handleDestinationToggle(d.name, userId)}
-              />
-            );
-          })}
-        </ul>
-      </Panel>
-    );
-  }
+  return (
+    <Panel
+      className={panelOpenForUserId[userId] ? 'active' : ''}
+      header={header}
+      eventKey={userId}
+      collapsible
+      expanded={panelOpenForUserId[userId] || false}
+      onClick={() => handlePanelClick(userId)}
+    >
+      <ul className="list-unstyled" onClick={e => e.stopPropagation()}>
+        {destinations.map((d, i) => {
+          const key = `${userId}-${i}`;
+          const authToken = currentUser.token;
 
-  _handlePanelClick(userId) {
-    this.store.dispatch({ type: 'TRAVELER_PANEL_CLICKED', userId });
-  }
-
-  _handleDestinationToggle(destinationName, userId) {
-    this.store.dispatch({
-      type: 'DESTINATION_TOGGLE',
-      userId,
-      name: destinationName
-    });
-  }
-
-  _saveDestinations(destinations) {
-    const { currentUser } = this.store.getState().reducer;
-
-    return apiCaller.updateDestinations(destinations, currentUser.token, currentUser.id)
-      .then(res => {
-        console.log(res.body)
-        this.store.dispatch({
-          type: 'DESTINATION_SAVED',
-          destinations: res.body.destinations
-        });
-      });
-  }
+          return (
+            <DestinationListItem
+              key={key}
+              id={`destination-list-item-${key}`}
+              isChecked={d.visited}
+              isDisabled={userId != currentUser.id}
+              label={d.name}
+              onChange={() => handleDestinationToggle(userId, currentUser, d.name, destinations)}
+            />
+          );
+        })}
+      </ul>
+    </Panel>
+  );
 };
 
-TravelerPanel.contextTypes = {
-  store: React.PropTypes.object
-}
+export default connect(mapStateToProps, mapDispatchToProps)(TravelerPanel);
+

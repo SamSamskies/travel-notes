@@ -4,12 +4,11 @@ import TravelerPanel from './TravelerPanel';
 
 const mapStateToProps = ({ reducer: state }) => {
   return {
-    travelers: state.travelers,
-    panelOpenForUserId: state.panelOpenForUserId
+    travelers: state.travelers
   }
 }
 
-const Travelers = ({ travelers, panelOpenForUserId }) => {
+const Travelers = ({ travelers }) => {
   return (
     <div>
       {travelers.map(t => {
@@ -19,13 +18,8 @@ const Travelers = ({ travelers, panelOpenForUserId }) => {
           <TravelerPanel
             key={userId}
             userId={userId}
-            className={panelOpenForUserId[userId] ? 'active' : ''}
             header={t.name.toUpperCase()}
-            eventKey={userId}
-            collapsible
-            expanded={panelOpenForUserId[userId] || false}
             destinations={t.destinations}
-            needToSave={t.needToSave}
           />
         );
       })}
