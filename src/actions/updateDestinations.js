@@ -1,11 +1,11 @@
 import constants from '../constants';
 import apiCaller from '../apiCaller';
 
-export default function handleDestinationDelete(userId, currentUser, destinations) {
+export default function updateDestinations(currentUser, destinations) {
   return dispatch => {
-    dispatch({ type: constants.DESTINATION_DELETE, userId, destinations });
+    const userId = currentUser.id;
 
-    return apiCaller.updateDestinations(destinations, currentUser.token, currentUser.id)
+    return apiCaller.updateDestinations(destinations, currentUser.token, userId)
       .then(res => {
         console.log(res.body)
         dispatch({

@@ -10,6 +10,7 @@ export default function handleDestinationToggle(userId, currentUser, destination
         console.log(res.body)
         dispatch({
           type: constants.DESTINATIONS_SAVED,
+          userId,
           destinations: res.body.destinations
         });
       });
