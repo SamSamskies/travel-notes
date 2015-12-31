@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Input, ButtonInput } from 'react-bootstrap';
+import Geosuggest from 'react-geosuggest';
 import TravelerPanel from './TravelerPanel';
 import { addNewDestination } from '../actions';
 
@@ -23,7 +24,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Travelers = ({ isLoading, currentUser, travelers, handleSubmit }) => {
-  let input;
+  let destinationName;
+  let geosuggest;
 
   return (
     <div>
@@ -39,8 +41,17 @@ const Travelers = ({ isLoading, currentUser, travelers, handleSubmit }) => {
           />
         );
       })}
-      <form className="new-destination-form" onSubmit={e => handleSubmit(e, currentUser, travelers, input.getValue())}>
-        <Input ref={node => input = node} type="text" label="New Destination" placeholder="Enter a location" />
+      <form className="new-destination-form" onSubmit={e => handleSubmit(e, currentUser, travelers, destinationName)}>
+        <label>New Destination</label>
+        <Geosuggest
+          ref={node => geosuggest = node}
+          placeholder="Enter a location"
+          types={["(cities)"]}
+          onSuggestSelect={s => {
+            [ destinationName ] = s.label.split(',');
+            geosuggest.update(destinationName);
+          }}
+        />
         <ButtonInput
           type="submit"
           bsStyle="primary"
