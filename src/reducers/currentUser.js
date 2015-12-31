@@ -1,4 +1,4 @@
-export default function currentUserReducer(currentUser = {}, action) {
+export default function currentUser(currentUser = {}, action) {
   switch (action.type) {
     case 'LOGGED_IN':
       const { id, name, token } = action;

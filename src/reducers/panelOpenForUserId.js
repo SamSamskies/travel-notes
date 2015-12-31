@@ -1,4 +1,4 @@
-export default function panelOpenForUserIdReducer(panelOpenForUserId = {}, action) {
+export default function panelOpenForUserId(panelOpenForUserId = {}, action) {
   const togglePanelOpenForUser = userId => {
     const clonedPanelOpenForUserId = Object.assign({}, panelOpenForUserId);
     const currentValue = panelOpenForUserId[userId];

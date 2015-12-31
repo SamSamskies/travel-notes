@@ -1,4 +1,4 @@
-export default function isLoadingReducer(isLoading = false, action) {
+export default function isLoading(isLoading = false, action) {
   switch (action.type) {
     case 'LOGIN':
       return true;
