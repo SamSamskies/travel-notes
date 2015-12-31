@@ -1,14 +1,26 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { Input, ButtonInput } from 'react-bootstrap';
 import TravelerPanel from './TravelerPanel';
 
 const mapStateToProps = ({ reducer: state }) => {
   return {
+    isLoading: state.isLoading,
     travelers: state.travelers
   }
 }
 
-const Travelers = ({ travelers }) => {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSubmit: (e, destinationName) => {
+      e.preventDefault();
+    }
+  }
+}
+
+const Travelers = ({ isLoading, travelers, handleSubmit }) => {
+  let input;
+
   return (
     <div>
       {travelers.map(t => {
@@ -23,6 +35,16 @@ const Travelers = ({ travelers }) => {
           />
         );
       })}
+      <form className="new-destination-form" onSubmit={e => handleSubmit(e, input.getValue())}>
+        <Input ref={node => input = node} type="text" label="New Destination" placeholder="Enter a location" />
+        <ButtonInput
+          type="submit"
+          bsStyle="primary"
+          disabled={isLoading}
+          block>
+          {isLoading ? 'Adding new destination...' : 'Add new destination'}
+        </ButtonInput>
+      </form>
     </div>
   );
 };
