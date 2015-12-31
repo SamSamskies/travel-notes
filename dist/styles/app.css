@@ -23,6 +23,7 @@ nav {
 
 #main-container {
   margin: 20px auto;
+  padding: 0 20px;
   width: 375px;
 }
 

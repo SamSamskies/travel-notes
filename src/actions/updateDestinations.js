@@ -8,6 +8,7 @@ export default function updateDestinations(currentUser, destinations) {
     return apiCaller.updateDestinations(destinations, currentUser.token, userId)
       .then(res => {
         console.log(res.body)
+
         dispatch({
           type: constants.DESTINATIONS_SAVED,
           userId,

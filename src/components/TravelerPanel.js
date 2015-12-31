@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Panel } from 'react-bootstrap';
 import DestinationListItem from './DestinationListItem';
 import {
-  handleTravelerPanelClick,
-  handleDestinationToggle,
-  handleDestinationDelete
+  toggleTravelerPanel,
+  toggleDestination,
+  deleteDestination
 } from '../actions';
 
 const mapStateToProps = ({ reducer: state }) => {
@@ -18,21 +18,13 @@ const mapStateToProps = ({ reducer: state }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handlePanelClick: userId => {
-      dispatch(handleTravelerPanelClick(userId));
+      dispatch(toggleTravelerPanel(userId));
     },
     handleDestinationToggle: (userId, currentUser, destinationName, destinations) => {
-      const updatedDestinations = destinations.map(d => {
-        if (d.name.toLowerCase() !== destinationName.toLowerCase()) return d;
-        return Object.assign({}, d, { visited: !d.visited });
-      });
-      dispatch(handleDestinationToggle(userId, currentUser, updatedDestinations));
+      dispatch(toggleDestination(userId, currentUser, destinationName, destinations));
     },
     handleDestinationDelete: (userId, currentUser, destinationName, destinations) => {
-      const updatedDestinations = destinations.reduce((memo, d) => {
-        if (d.name.toLowerCase() === destinationName.toLowerCase()) return memo;
-        return memo.concat([d]);
-      }, []);
-      dispatch(handleDestinationDelete(userId, currentUser, updatedDestinations));
+      dispatch(deleteDestination(userId, currentUser, destinationName, destinations));
     }
   }
 }
