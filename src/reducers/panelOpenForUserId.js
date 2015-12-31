@@ -1,3 +1,5 @@
+import constants from '../constants';
+
 export default function panelOpenForUserId(panelOpenForUserId = {}, action) {
   const togglePanelOpenForUser = userId => {
     const clonedPanelOpenForUserId = Object.assign({}, panelOpenForUserId);
@@ -7,10 +9,10 @@ export default function panelOpenForUserId(panelOpenForUserId = {}, action) {
   }
 
   switch (action.type) {
-    case 'LOGGED_IN':
+    case constants.LOGGED_IN:
       const { id } = action;
       return togglePanelOpenForUser(id);
-    case 'TRAVELER_PANEL_CLICKED':
+    case constants.TRAVELER_PANEL_CLICKED:
       const { userId } = action;
       return togglePanelOpenForUser(userId);
     default:

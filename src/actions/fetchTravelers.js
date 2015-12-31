@@ -1,3 +1,4 @@
+import constants from '../constants';
 import apiCaller from '../apiCaller';
 
 export default function fetchTravelers(authToken) {
@@ -5,7 +6,7 @@ export default function fetchTravelers(authToken) {
 
     return apiCaller.getTravelers(authToken)
       .then(res => dispatch({
-        type: 'TRAVELERS_FETCHED',
+        type: constants.TRAVELERS_FETCHED,
         travelers: res.body
       }));
   }
