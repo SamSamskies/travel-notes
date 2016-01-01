@@ -31,12 +31,7 @@ gulp.task('sass', function () {
 
 gulp.task('watch', ['browserify', 'sass'], function () {
   gulp.watch('src/**/*.js', ['browserify']);
-  gulp.watch('src/**/*.scss', ['sass'])
-    // When there is a change,
-    // log a message in the console
-    // .on('change', function(event) {
-    //   console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    // });
+  gulp.watch('src/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['watch']);
