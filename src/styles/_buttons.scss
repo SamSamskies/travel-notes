@@ -1,0 +1,17 @@
+.btn {
+  margin: 30px 0;
+  font-size: $default-font-size;
+}
+
+.btn-primary {
+  background-color: #333;
+  border: #333;
+  padding: 14px;
+}
+
+.btn-primary:hover,
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus {
+  background-color: #999;
+  border-color: #999;
+}

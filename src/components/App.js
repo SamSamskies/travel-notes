@@ -4,10 +4,10 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <nav>
+        <header>
           <span>Travel Notes</span>
           <span className="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-        </nav>
+        </header>
         <div id="main-container">
           {this.props.children}
         </div>

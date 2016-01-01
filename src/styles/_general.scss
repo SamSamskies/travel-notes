@@ -1,16 +1,8 @@
-body, .btn {
-  font-size: 20px;
+body {
+  font-size: $default-font-size;
 }
 
-input[type="checkbox"]:focus {
-  outline: 0;
-}
-
-input[type="checkbox"]:checked + label {
-  text-decoration: line-through;
-}
-
-nav {
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,31 +19,6 @@ nav {
   width: 375px;
 }
 
-.btn {
-  margin: 30px 0;
-}
-
-.btn-primary {
-  background-color: #333;
-  border: #333;
-  padding: 14px;
-}
-
-.btn-primary:hover,
-.btn-primary[disabled]:hover,
-.btn-primary[disabled]:focus {
-  background-color: #999;
-  border-color: #999;
-}
-
-.checkbox {
-  cursor: initial;
-}
-
-.checkbox label {
-  font-size: 14px;
-}
-
 .delete-destination-icon {
   display: none;
   float: right;
@@ -61,34 +28,6 @@ nav {
 
 .destination-enabled .delete-destination-icon {
   display: inline;
-}
-
-.panel {
-  margin-bottom: 0px;
-}
-
-.panel:hover {
-  cursor: pointer;
-}
-
-.panel-default>.panel-heading {
-  background-color: #333;
-  color: white;
-}
-
-.panel-title:after,
-.panel.active .panel-title:after {
-  font-family: 'Glyphicons Halflings';
-  content: "\e080";
-  float: right;
-}
-
-.panel.active .panel-title:after {
-  content: "\e259";
-}
-
-.panel-title a {
-  text-decoration: none;
 }
 
 .new-destination-form {

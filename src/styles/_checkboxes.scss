@@ -1,0 +1,15 @@
+input[type="checkbox"]:focus {
+  outline: 0;
+}
+
+input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+}
+
+.checkbox {
+  cursor: initial;
+}
+
+.checkbox label {
+  font-size: 14px;
+}

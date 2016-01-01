@@ -1,0 +1,27 @@
+.panel {
+  margin-bottom: 0px;
+}
+
+.panel:hover {
+  cursor: pointer;
+}
+
+.panel-default>.panel-heading {
+  background-color: #333;
+  color: white;
+}
+
+.panel-title:after,
+.panel.active .panel-title:after {
+  font-family: 'Glyphicons Halflings';
+  content: "\e080";
+  float: right;
+}
+
+.panel.active .panel-title:after {
+  content: "\e259";
+}
+
+.panel-title a {
+  text-decoration: none;
+}
