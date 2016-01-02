@@ -1,4 +1,5 @@
 export { default as login } from './login';
+export { default as toggleDrawer } from './toggleDrawer';
 export { default as toggleTravelerPanel } from './toggleTravelerPanel';
 export { default as toggleDestination } from './toggleDestination';
 export { default as deleteDestination } from './deleteDestination';

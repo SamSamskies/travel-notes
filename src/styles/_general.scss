@@ -1,22 +1,123 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-size: $default-font-size;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #333;
-  height: 70px;
-  color: white;
-  padding: 0 20px;
-  font-size: 24px;
+header h2 {
+  margin: 0;
 }
 
 #main-container {
+  display: flex;
+
+  &.drawer-open {
+
+    #layout {
+      margin-left: -$drawer-width;
+    }
+
+    #drawer {
+      margin-right: 0;
+    }
+
+    .glyphicon-menu-right {
+      right: 0;
+    }
+
+    .glyphicon-menu-hamburger {
+      right: -30px;
+    }
+  }
+}
+
+#content-container {
   margin: 20px auto;
   padding: 0 20px;
   width: 375px;
+}
+
+#drawer-icon-container {
+  overflow: hidden;
+  position: relative;
+  width: 30px;
+  height: 20px;
+
+  .glyphicon-menu-right,
+  .glyphicon-menu-hamburger {
+    position: absolute;
+  }
+
+  .glyphicon-menu-right {
+    right: -30px;
+  }
+
+  .glyphicon-menu-hamburger {
+    right: 0;
+  }
+}
+
+#drawer {
+  height: 100vh;
+  width: $drawer-width;
+  margin-right: -$drawer-width;
+  background: $default-background-color;
+  color: white;
+  transition: margin-right $drawer-transition-time $drawer-transition-effect;
+
+  a {
+    display: block;
+    color: white;
+    text-decoration: none;
+  }
+
+  header {
+    height: 70px;
+    padding-left: 20px;
+
+    h2 {
+      line-height: 70px;
+    }
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 60px;
+    border-top: 1px solid black;
+    padding: 0 20px;
+    color: grey;
+
+    &:last-child {
+      border-bottom: 1px solid black;
+    }
+
+    .glyphicon {
+      padding-right: 8px;
+    }
+  }
+}
+
+#layout {
+  flex-grow: 1;
+  transition: margin-left $drawer-transition-time;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $default-background-color;
+    height: 70px;
+    color: white;
+    padding: 0 20px;
+    border-right: 1px solid grey;
+
+    .glyphicon {
+      cursor: pointer;
+    }
+  }
 }
 
 .delete-destination-icon {

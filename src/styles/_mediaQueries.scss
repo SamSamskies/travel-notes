@@ -1,0 +1,12 @@
+@media (min-width: 380px) {
+  #main-container {
+
+    &.drawer-open {
+
+      #layout {
+        margin-left: 0;
+      }
+
+    }
+  }
+}
