@@ -47,7 +47,7 @@ const Travelers = ({ isLoading, currentUser, travelers, handleSubmit }) => {
           ref={node => geosuggest = node}
           placeholder="Enter a location"
           types={["(cities)"]}
-          onChange={() => destinationName = geosuggest.state.userInput}
+          onChange={val => destinationName = val}
           onSuggestSelect={s => {
             const [ shortDestinationName ] = s.label.split(',');
             geosuggest.update(shortDestinationName);
