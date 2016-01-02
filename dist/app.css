@@ -392,11 +392,11 @@ header h2 {
   margin-right: 0;
 }
 
-#main-container.drawer-open .glyphicon-menu-right {
+#main-container.drawer-open #drawer-close-icon {
   right: 0;
 }
 
-#main-container.drawer-open .glyphicon-menu-hamburger {
+#main-container.drawer-open #drawer-open-icon {
   right: -30px;
 }
 
@@ -413,16 +413,16 @@ header h2 {
   height: 20px;
 }
 
-#drawer-icon-container .glyphicon-menu-right,
-#drawer-icon-container .glyphicon-menu-hamburger {
+#drawer-icon-container #drawer-close-icon,
+#drawer-icon-container #drawer-open-icon {
   position: absolute;
 }
 
-#drawer-icon-container .glyphicon-menu-right {
+#drawer-icon-container #drawer-close-icon {
   right: -30px;
 }
 
-#drawer-icon-container .glyphicon-menu-hamburger {
+#drawer-icon-container #drawer-open-icon {
   right: 0;
 }
 
