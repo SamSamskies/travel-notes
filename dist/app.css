@@ -580,7 +580,7 @@ input[type="checkbox"]:checked + label {
   text-decoration: none;
 }
 
-@media (min-width: 380px) {
+@media (min-width: 600px) {
   #main-container.drawer-open #layout {
     margin-left: 0;
   }
