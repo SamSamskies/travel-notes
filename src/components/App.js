@@ -43,7 +43,7 @@ const App = ({ isDrawerOpen, currentUser, handleDrawerIconClick, children }) => 
             <span>{`Hello${currentUser.name ? ', ' + _s.capitalize(currentUser.name) + '!' : ''}`}</span>
           </li>
           <li>
-            <a href="/">
+            <a href="/travel-notes">
               <span className="glyphicon glyphicon-log-out"></span>
               <span>Leave</span>
             </a>
