@@ -10,6 +10,9 @@
 }
 
 .btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:hover,
 .btn-primary[disabled]:hover,
 .btn-primary[disabled]:focus {
   background-color: #999;
