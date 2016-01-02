@@ -24,11 +24,11 @@ header h2 {
       margin-right: 0;
     }
 
-    .glyphicon-menu-right {
+    #drawer-close-icon {
       right: 0;
     }
 
-    .glyphicon-menu-hamburger {
+    #drawer-open-icon {
       right: -30px;
     }
   }
@@ -46,16 +46,16 @@ header h2 {
   width: 30px;
   height: 20px;
 
-  .glyphicon-menu-right,
-  .glyphicon-menu-hamburger {
+  #drawer-close-icon,
+  #drawer-open-icon {
     position: absolute;
   }
 
-  .glyphicon-menu-right {
+  #drawer-close-icon {
     right: -30px;
   }
 
-  .glyphicon-menu-hamburger {
+  #drawer-open-icon {
     right: 0;
   }
 }
