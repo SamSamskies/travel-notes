@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Glyphicon } from 'react-bootstrap';
 import { toggleDrawer } from '../actions';
 import _s from 'underscore.string';
 
@@ -25,8 +26,8 @@ const App = ({ isDrawerOpen, currentUser, handleDrawerIconClick, children }) => 
         <header>
           <h2>Travel Notes</h2>
           <div id="drawer-icon-container">
-            <span className="glyphicon glyphicon-menu-hamburger" onClick={handleDrawerIconClick}></span>
-            <span className="glyphicon glyphicon-menu-right" onClick={handleDrawerIconClick}></span>
+            <Glyphicon id="drawer-open-icon" glyph="menu-hamburger" onClick={handleDrawerIconClick} />
+            <Glyphicon id="drawer-close-icon" glyph="menu-right" onClick={handleDrawerIconClick} />
           </div>
         </header>
         <div id="content-container">
@@ -39,13 +40,11 @@ const App = ({ isDrawerOpen, currentUser, handleDrawerIconClick, children }) => 
         </header>
         <ul className="list-unstyled">
           <li>
-            <span className="glyphicon glyphicon-user"></span>
-            <span>{`Hello${currentUser.name ? ', ' + _s.capitalize(currentUser.name) + '!' : ''}`}</span>
+            <Glyphicon glyph="user" /> {`Hello${currentUser.name ? ', ' + _s.capitalize(currentUser.name) + '!' : ''}`}
           </li>
           <li>
-            <a href="/travel-notes">
-              <span className="glyphicon glyphicon-log-out"></span>
-              <span>Leave</span>
+            <a href="/">
+              <Glyphicon glyph="log-out" /> Leave
             </a>
           </li>
         </ul>
