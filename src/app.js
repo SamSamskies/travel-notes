@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import { Router, Route, Redirect } from 'react-router';
 import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 import { Provider } from 'react-redux';
-import { createHistory, useBasename } from 'history';
+import { createHashHistory, useBasename } from 'history';
 import reducers from './reducers';
 import { App, Login, Travelers } from './components';
 
@@ -14,7 +14,7 @@ const reducer = combineReducers(Object.assign({}, reducers, {
 }));
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
-const history = useBasename(createHistory)({ basename: '/travel-notes' });
+const history = useBasename(createHashHistory)({ basename: '/travel-notes' });
 
 syncReduxAndRouter(history, store);
 
