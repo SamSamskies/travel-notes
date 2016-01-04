@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleSubmit: (e, name) => {
       e.preventDefault();
-      dispatch(login(name));
+      dispatch(login(name.trim()));
     }
   }
 }
