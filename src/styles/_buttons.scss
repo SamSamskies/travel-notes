@@ -10,11 +10,15 @@
 }
 
 .btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary:active:hover,
 .btn-primary[disabled]:hover,
 .btn-primary[disabled]:focus {
   background-color: #999;
   border-color: #999;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:hover {
+  background-color: #333;
+  border: #333;
 }
