@@ -21,9 +21,8 @@ syncReduxAndRouter(history, store);
 ReactDOM.render((
   <Provider store={store}>
     <Router history={history}>
-      <Redirect from="/" to="start" />
       <Route component={App}>
-        <Route path="start" component={Login}/>
+        <Route path="/" component={Login}/>
         <Route path="travelers" component={Travelers}/>
       </Route>
     </Router>
