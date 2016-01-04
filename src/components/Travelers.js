@@ -17,6 +17,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleSubmit: (e, currentUser, travelers, destinationName) => {
       e.preventDefault();
+
+      // Silently fail if button clicked, with no input
+      if (!destinationName) return;
+
       const traveler = travelers.find(t => t.id == currentUser.id);
       dispatch(addNewDestination(currentUser, destinationName, traveler.destinations));
     }
