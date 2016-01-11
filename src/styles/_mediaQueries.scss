@@ -10,3 +10,9 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .github-fork-ribbon-wrapper {
+    display: none;
+  }
+}

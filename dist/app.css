@@ -589,3 +589,9 @@ input[type="checkbox"]:checked + label {
     margin-left: 0;
   }
 }
+
+@media (max-width: 600px) {
+  .github-fork-ribbon-wrapper {
+    display: none;
+  }
+}
