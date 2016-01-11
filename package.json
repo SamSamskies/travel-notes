@@ -43,8 +43,6 @@
     "redux": "^3.0.5",
     "redux-simple-router": "^1.0.2",
     "redux-thunk": "^1.0.3",
-    "superagent": "^1.6.1",
-    "superagent-bluebird-promise": "^2.1.1",
     "underscore.string": "^3.2.2"
   }
 }
