@@ -45,7 +45,13 @@ const Travelers = ({ isLoading, currentUser, travelers, handleSubmit }) => {
           />
         );
       })}
-      <form className="new-destination-form" onSubmit={e => handleSubmit(e, currentUser, travelers, destinationName)}>
+      <form
+        className="new-destination-form"
+        onSubmit={e => {
+          handleSubmit(e, currentUser, travelers, destinationName);
+          geosuggest.clear();
+        }}
+      >
         <label>New Destination</label>
         <Geosuggest
           ref={node => geosuggest = node}
@@ -61,7 +67,8 @@ const Travelers = ({ isLoading, currentUser, travelers, handleSubmit }) => {
           type="submit"
           bsStyle="primary"
           disabled={isLoading}
-          block>
+          block
+        >
           {isLoading ? 'Adding new destination...' : 'Add new destination'}
         </ButtonInput>
       </form>
