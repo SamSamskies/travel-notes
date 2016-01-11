@@ -9,10 +9,8 @@ export default function login(name) {
     dispatch({ type: constants.LOGIN, name });
 
     return apiCaller.login(name)
-      .then(res => {
-        dispatch(handleSuccessfulLogin(res.body));
-      })
-      .catch(() => {
+      .then(t => dispatch(handleSuccessfulLogin(t)))
+      .catch((e) => {
         alert('Only valid users are Amos, Andy, or Evie');
         dispatch(turnOffLoadingState());
       });

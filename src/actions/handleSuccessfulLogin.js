@@ -6,7 +6,7 @@ import turnOffLoadingState from './turnOffLoadingState';
 export default function handleSuccessfulLogin(currentUser) {
   return dispatch => {
     dispatch(Object.assign({}, currentUser, { type: constants.LOGGED_IN }));
-    dispatch(fetchTravelers(currentUser.token));
+    dispatch(fetchTravelers());
     dispatch(pushPath('/travelers'));
     dispatch(turnOffLoadingState());
   }

@@ -5,14 +5,12 @@ export default function updateDestinations(currentUser, destinations) {
   return dispatch => {
     const userId = currentUser.id;
 
-    return apiCaller.updateDestinations(destinations, currentUser.token, userId)
-      .then(res => {
-        console.log(res.body)
-
+    return apiCaller.updateDestinations(destinations)
+      .then(destinations => {
         dispatch({
           type: constants.DESTINATIONS_SAVED,
           userId,
-          destinations: res.body.destinations
+          destinations
         });
       });
   }

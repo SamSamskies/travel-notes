@@ -1,24 +1,24 @@
-import request from 'superagent-bluebird-promise';
+import P from 'bluebird';
+import { TRAVELERS } from './mockedApiResponse';
 
-const baseUrl = 'https://young-beyond-8772.herokuapp.com';
+const DELAY_DEFAULT = 200;
 
 export default {
   login(name) {
-    return request
-      .post(`${baseUrl}/auth`)
-      .send({ name });
+    return P.delay(DELAY_DEFAULT)
+      .then(() => {
+        let user = TRAVELERS.find(t => t.name.toLowerCase() === name.toLowerCase());
+
+        if (user) return user;
+        else throw new Error('Invalid user');
+      });
   },
 
-  getTravelers(authToken) {
-    return request
-      .get(`${baseUrl}/travelers`)
-      .set('Authorization', `Token token=${authToken}`);
+  getTravelers() {
+    return P.delay(DELAY_DEFAULT).return(TRAVELERS);
   },
 
-  updateDestinations(destinations, authToken, userId) {
-    return request
-      .patch(`${baseUrl}/travelers/${userId}`)
-      .send({ destinations })
-      .set('Authorization', `Token token=${authToken}`)
+  updateDestinations(destinations) {
+    return P.delay(DELAY_DEFAULT).return(destinations);
   }
 };
